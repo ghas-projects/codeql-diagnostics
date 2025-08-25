@@ -29,7 +29,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd ${{ matrix.pack }}
-          gh codeql resolve qlpacks
+          gh codeql resolve packs
           gh codeql pack install ${{ matrix.pack }}
           gh codeql pack publish ${{ matrix.pack }}
