@@ -7,4 +7,4 @@ version: 0.0.1
 defaultSuite:
   queries: .
 dependencies:
-  codeql-java-all: "*"
+  codeql-java-all: 7.6.0
