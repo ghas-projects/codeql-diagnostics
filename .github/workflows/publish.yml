@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pack: ["codeql-diagnostic-java"]
+        pack: ["codeql-diagnostics-java"]
 
     steps:
       - name: "Checkout repository"
