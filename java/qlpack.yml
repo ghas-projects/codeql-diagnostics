@@ -2,7 +2,9 @@
 library: false
 warnOnImplicitThis: false
 compileForOverlayEval: false
-name: ghas-projects/codeql-diagnostics-cpp
+name: ghas-projects/codeql-diagnostics-java
 version: 0.0.1
+defaultSuite:
+  queries: .
 dependencies:
-  codeql-cpp-all: ^5.4.0
+  codeql-java-all: ^7.5.0
