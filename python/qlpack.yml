@@ -1,0 +1,8 @@
+---
+library: false
+warnOnImplicitThis: false
+compileForOverlayEval: false
+name: ghas-projects/codeql-diagnostics-python
+version: 0.0.1
+dependencies:
+  codeql-python-all: ^4.0.12

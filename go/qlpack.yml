@@ -1,0 +1,8 @@
+---
+library: false
+warnOnImplicitThis: false
+compileForOverlayEval: false
+name: ghas-projects/codeql-diagnostics-go
+version: 0.0.1
+dependencies:
+  codeql-go-all: ^4.3.1
