@@ -5,5 +5,4 @@ compileForOverlayEval: false
 name: ghas-projects/codeql-diagnostics-java
 version: 0.0.1
 dependencies:
-  codeql/java-all: ^7.5.0
-extractor: java
+  codeql/java-all: 7.5.0

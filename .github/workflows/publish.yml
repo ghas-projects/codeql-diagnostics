@@ -30,39 +30,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Function to get compatible pack version
-          function getCompatiblePack() { 
-            echo -n $(curl -s https://raw.githubusercontent.com/github/codeql/codeql-cli/v$(gh codeql version --format=json | jq -r .version)/$1/ql/lib/qlpack.yml | grep version | cut -d" " -f2)
-          }
-          
-          # Add compatible pack version for the language
-          gh codeql pack add codeql/${{ matrix.pack }}-all@$(getCompatiblePack ${{ matrix.pack }}) --dir=${{ matrix.pack }}
-          
+
           # Install and publish pack
           gh codeql resolve packs
           gh codeql pack install ${{ matrix.pack }}
-          
-          # Commit and push changes to qlpack.yml if modified
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add ${{ matrix.pack }}/qlpack.yml
-          
-          if ! git diff --cached --quiet; then
-            git commit -m "Update qlpack.yml with compatible pack version for ${{ matrix.pack }}"
-            
-            # Retry push with pull in case of conflicts from parallel jobs
-            for i in {1..5}; do
-              if git push; then
-                echo "Successfully pushed changes"
-                break
-              else
-                echo "Push failed, pulling latest changes and retrying (attempt $i/5)"
-                git pull origin main
-              fi
-              sleep $((i * 2))  # Exponential backoff
-            done
-          else
-            echo "No changes to commit for ${{ matrix.pack }}"
-          fi
-          
           gh codeql pack publish ${{ matrix.pack }}
