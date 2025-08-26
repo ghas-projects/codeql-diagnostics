@@ -48,7 +48,23 @@ jobs:
           git add ${{ matrix.pack }}/qlpack.yml
           if ! git diff --cached --quiet; then
             git commit -m "Update qlpack.yml with compatible pack version for ${{ matrix.pack }}"
-            git push
+            
+            # Retry push with pull in case of conflicts from parallel jobs
+            for i in {1..5}; do
+              if git push; then
+                echo "Successfully pushed changes"
+                break
+              else
+                echo "Push failed, pulling latest changes and retrying (attempt $i/5)"
+                git pull --rebase origin main
+                if [ $? -ne 0 ]; then
+                  echo "Rebase failed, trying merge strategy"
+                  git rebase --abort 2>/dev/null || true
+                  git pull origin main
+                fi
+              fi
+              sleep $((i * 2))  # Exponential backoff
+            done
           fi
           
           gh codeql pack publish ${{ matrix.pack }}
