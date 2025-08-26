@@ -12,18 +12,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pack: ["java"]
+        pack: ["cpp", "csharp", "go", "javascript", "python","java"]
 
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v3
 
-      - name: "Install latest CodeQL"
+      - name: "Install CodeQL"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh extension install github/gh-codeql
-          gh codeql set-version latest
+          gh codeql set-version 2.22.3
 
       - name: "Build and publish pack"
         env:
