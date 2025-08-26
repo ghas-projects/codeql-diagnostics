@@ -2,7 +2,7 @@
 library: false
 warnOnImplicitThis: false
 compileForOverlayEval: false
-name: codeql-diagnostic-javascript
+name: ghas-projects/codeql-diagnostic-javascript
 version: 0.0.1
 dependencies:
   codeql/javascript-all: ^2.6.8
