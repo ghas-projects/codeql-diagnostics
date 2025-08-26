@@ -46,7 +46,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add ${{ matrix.pack }}/qlpack.yml
-          git commit -m "Update qlpack.yml with compatible pack version for ${{ matrix.pack }}"
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "Update qlpack.yml with compatible pack version for ${{ matrix.pack }}"
             
             # Retry push with pull in case of conflicts from parallel jobs
             for i in {1..5}; do
@@ -56,12 +58,11 @@ jobs:
               else
                 echo "Push failed, pulling latest changes and retrying (attempt $i/5)"
                 git pull origin main
-                if [ $? -ne 0 ]; then
-                  git pull origin main
-                fi
               fi
               sleep $((i * 2))  # Exponential backoff
             done
+          else
+            echo "No changes to commit for ${{ matrix.pack }}"
           fi
           
           gh codeql pack publish ${{ matrix.pack }}
