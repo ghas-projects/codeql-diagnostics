@@ -5,4 +5,4 @@ compileForOverlayEval: false
 name: codeql-diagnostic-javascript
 version: 0.0.1
 dependencies:
-  codeql/javascript-all: 2.6.8
+  codeql/javascript-all: ^2.6.8
