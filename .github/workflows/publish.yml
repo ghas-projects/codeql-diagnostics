@@ -24,7 +24,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh extension install github/gh-codeql
-          gh codeql set-version 2.22.3
+          gh codeql set-version latest
 
       - name: "Build and publish pack"
         env:
