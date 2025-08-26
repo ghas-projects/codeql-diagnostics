@@ -5,4 +5,4 @@ compileForOverlayEval: false
 name: ghas-projects/codeql-diagnostics-csharp
 version: 0.0.1
 dependencies:
-  codeql-csharp-all: ^5.2.1
+  codeql-csharp-all: 5.2.2
