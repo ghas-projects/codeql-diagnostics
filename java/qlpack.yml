@@ -7,6 +7,3 @@ version: 0.0.1
 dependencies:
   codeql/java-all: ^7.5.0
 extractor: java
-defaultSuite:
- -
-  queries: .

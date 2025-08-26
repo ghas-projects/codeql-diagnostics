@@ -46,8 +46,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add ${{ matrix.pack }}/qlpack.yml
-          if ! git diff --cached --quiet; then
-            git commit -m "Update qlpack.yml with compatible pack version for ${{ matrix.pack }}"
+          git commit -m "Update qlpack.yml with compatible pack version for ${{ matrix.pack }}"
             
             # Retry push with pull in case of conflicts from parallel jobs
             for i in {1..5}; do
@@ -56,10 +55,8 @@ jobs:
                 break
               else
                 echo "Push failed, pulling latest changes and retrying (attempt $i/5)"
-                git pull --rebase origin main
+                git pull origin main
                 if [ $? -ne 0 ]; then
-                  echo "Rebase failed, trying merge strategy"
-                  git rebase --abort 2>/dev/null || true
                   git pull origin main
                 fi
               fi
