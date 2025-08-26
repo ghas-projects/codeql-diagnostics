@@ -5,4 +5,4 @@ compileForOverlayEval: false
 name: ghas-projects/codeql-diagnostics-cpp
 version: 0.0.1
 dependencies:
-  codeql-cpp-all: 5.4.0
+  codeql/cpp-all: ^5.4.0
