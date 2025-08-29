@@ -1,0 +1,8 @@
+---
+library: false
+warnOnImplicitThis: false
+compileForOverlayEval: false
+name: ghas-projects/codeql-diagnostics-yml
+version: 0.0.1
+dependencies:
+  codeql/actions-all: ^0.4.15
