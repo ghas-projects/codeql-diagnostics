@@ -33,5 +33,7 @@ jobs:
 
           # Install and publish pack
           gh codeql resolve packs
-          gh codeql pack install ${{ matrix.pack }}
-          gh codeql pack publish ${{ matrix.pack }}
+          gh codeql pack install ${{ matrix.pack }} 
+          gh codeql pack publish ${{ matrix.pack }} --pack "dist/${{ matrix.pack }}.tgz"
+
+        
