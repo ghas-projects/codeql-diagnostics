@@ -36,4 +36,8 @@ jobs:
           gh codeql pack install ${{ matrix.pack }} 
           gh codeql pack publish ${{ matrix.pack }} --pack "dist/${{ matrix.pack }}.tgz"
 
-        
+      - name: Upload published pack tarballs
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-packs
+          path: dist/*.tgz
